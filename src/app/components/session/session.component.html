@@ -1,0 +1,87 @@
+<!-- <h1 style="text-align: center; color: blue;" *ngIf="user">Welcome {{user.name}}</h1> -->
+
+<mat-toolbar color="primary">
+
+    <button mat-button>
+        <mat-icon>home</mat-icon>
+    </button>
+    <h2>Welcome, <span style="color: #FF32F4;">{{user.name}}</span></h2>
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+    <h3 style="font-size: 15px;"><span [class.redColor]="check">{{checkinTime}}</span></h3>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+        <!-- <span [class.redColor]="check">{{checkinTime}}</span> -->
+        <button *ngIf="!check" style="color: #8CE209;" mat-button (click)="checkIn()">CheckIn</button>
+        <button *ngIf="check" style="color: #FD7A82;" mat-button (click)="checkOut()">CheckOut</button>
+        <button mat-button (click)="attendance()">Attendance</button>
+        <button mat-button routerLink="/login" (click)="logOut()">LogOut</button>
+    </div>
+    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+    </button>
+
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+    <div>
+        <button *ngIf="!check" mat-menu-item (click)="checkIn()">CheckIn</button>
+        <button *ngIf="check" mat-menu-item (click)="checkOut()">checkOut</button>
+        <button mat-menu-item (click)="attendance()">Attendance</button>
+        <button mat-menu-item routerLink="/login" (click)="logOut()">LogOut</button>
+    </div>
+    <!--<button mat-menu-item>Help</button>-->
+</mat-menu>
+
+<div class="container mt-5">
+    <!-- <div class="row"> -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width: 100px;" alt="ProfilePhoto">
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Name: {{user.name}}</h3>
+                        <h3>Email: {{user.email}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+</div>
+
+
+<div class="container">
+    <div *ngIf="attRecord" class="row mt-5">
+        <div class="col-12">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">LoginTime</th>
+                        <th scope="col">LogoutTime</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">WorkedTime</th>
+                        <th scope="col">LoggedInTime</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let at of attRecord; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{at.date}}</td>
+                        <td>{{at.loginTime}}</td>
+                        <td>{{at.logoutTime}}</td>
+                        <td>{{at.status}}</td>
+                        <td>{{at.workedTime}}</td>
+                        <td>{{at.loggedInTime}}</td>
+                        <td><a style="color: blue;" (click)="timeLog(at.timeLog)">More</a></td>
+                        <!-- <td><button class="btn btn-primary" mat-button (click)="timeLog(at.timeLog)">More</button></td> -->
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

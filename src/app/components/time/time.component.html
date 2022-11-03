@@ -1,0 +1,32 @@
+<h1 style="text-align: center;">{{logDate}}</h1>
+
+<div class="container">
+
+    <mat-dialog-content class="mat-typography">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">CheckIn</th>
+                    <th scope="col">CheckOut</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let l of data; index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{l.checkIn}}</td>
+                    <td>{{l.checkOut}}</td>
+                    <td>{{l.checkInTime}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </mat-dialog-content>
+
+    <div mat-dialog-actions>
+        <button style="margin-top: 2px;" class="btn btn-danger" mat-button (click)="close()">Close</button>
+    </div>
+
+</div>

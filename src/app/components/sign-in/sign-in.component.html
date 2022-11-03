@@ -1,0 +1,19 @@
+
+<h1>SignIn</h1>
+<form class="form-group" [formGroup]="signInForm">
+    <!-- <label for="name">Name: <span style="color: red;">*</span></label>
+    <input class="form-control" type="text" id="name" formControlName="name">
+    <span style="color: red; font-style: italic;" *ngIf="signInForm.controls.name.touched && signInForm.controls.name.invalid">Name is required</span><br> -->
+    <label for="email">Email: <span style="color: red;">*</span></label>
+    <input class="form-control" type="text" id="email" formControlName="email">
+    <span style="color: red; font-style: italic;" *ngIf="signInForm.controls.email.touched && signInForm.controls.email.invalid">Enter valid email</span><br>
+    <label for="password">Password: <span style="color: red;">*</span></label>
+    <input class="form-control" type="password" id="password" formControlName="password">
+    <span style="color: red; font-style: italic;" *ngIf="signInForm.controls.password.touched && signInForm.controls.password.invalid">Password is required</span><br>
+    <span style="color: red; font-style: italic;" *ngIf="wrongCrdn">Incorrect username or password</span>
+    <div mat-dialog-actions>
+        <button style="margin-top: 2px;" mat-button class="btn btn-success" (click)="signIn()">SignIn</button>
+        <button style="margin-top: 2px;" class="btn btn-danger" mat-button mat-dialog-close>Close</button>
+    </div><br>
+    <a routerLink="forgotPass" mat-dialog-close>Forgot Password</a>
+</form>

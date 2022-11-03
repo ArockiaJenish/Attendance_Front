@@ -1,0 +1,28 @@
+
+<mat-toolbar color="primary">
+
+    <button mat-button routerLink="/">
+      <mat-icon>home</mat-icon>
+      {{title}}
+    </button>
+  
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+    <div *ngIf="!login" fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <button mat-button (click)="signUp()">SignUp</button>
+      <button mat-button (click)="signIn()">SignIn</button>
+    </div>
+    
+    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+  
+  </mat-toolbar>
+  <mat-menu x-position="before" #menu="matMenu">
+    <div *ngIf="!login">
+      <button mat-menu-item (click)="signUp()">SignUp</button>
+      <button mat-menu-item (click)="signIn()">SignIn</button>
+    </div>
+    <!--<button mat-menu-item>Help</button>-->
+  </mat-menu>
+  

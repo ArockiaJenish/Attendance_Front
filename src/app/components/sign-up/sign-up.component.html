@@ -1,0 +1,38 @@
+<h1>SignUp</h1>
+<form class="form-group" [formGroup]="signUpForm">
+    <label for="name">Name: <span style="color: red;">*</span></label>
+    <input class="form-control" type="text" id="name" formControlName="name">
+    <span style="color: red; font-style: italic;"
+        *ngIf="signUpForm.controls.name.touched && signUpForm.controls.name.invalid">Name is required</span><br>
+    <span style="color: red; font-style: italic;" *ngIf="!signUpForm.controls.name.touched && submited">Name is
+        required</span><br>
+    <label for="email">Email: <span style="color: red;">*</span></label>
+    <input class="form-control" type="text" id="email" formControlName="email">
+    <span style="color: red; font-style: italic;"
+        *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email.invalid">Enter valid email</span><br>
+    <span style="color: red; font-style: italic;" *ngIf="!signUpForm.controls.email.touched && submited">Email is
+        required</span><br>
+    <label for="password">Password: <span style="color: red;">*</span></label>
+    <input class="form-control" type="password" id="password" formControlName="password">
+    <span style="color: red; font-style: italic;"
+        *ngIf="signUpForm.controls.password.touched && signUpForm.controls.password.invalid">Password is
+        required</span><br>
+    <span style="color: red; font-style: italic;" *ngIf="!signUpForm.controls.password.touched && submited">Password is
+        required</span><br>
+    <span *ngIf="response">{{response}}</span>
+    <label for="cnfPassword">Conform password: <span style="color: red;">*</span></label>
+    <input class="form-control" type="password" id="cnfPassword" formControlName="cnfPassword">
+    <span style="color: red; font-style: italic;"
+        *ngIf="signUpForm.controls.cnfPassword.touched && signUpForm.controls.cnfPassword.invalid">Password is
+        required</span><br>
+    <span style="color: red; font-style: italic;" *ngIf="!signUpForm.controls.cnfPassword.touched && submited">Password is
+        required</span><br>
+    <span style="color: red; font-style: italic;"
+        *ngIf="signUpForm.controls.password.touched && signUpForm.controls.cnfPassword.touched && !matches">Password is
+        not matching</span><br>
+    <span *ngIf="response">{{response}}</span>
+    <div mat-dialog-actions>
+        <button class="btn btn-success" mat-button (click)="signUp()">SignUp</button>
+        <button class="btn btn-danger" mat-button mat-dialog-close>Close</button>
+    </div>
+</form>
