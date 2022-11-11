@@ -46,11 +46,8 @@ export class SignInComponent implements OnInit {
   }
 
   inSession(user: any) {
-    //this.serv.loginMode(user);
     console.log('inSession()...');
     console.log(user);
-    // this.sendUser.emit(user);
-    //this._sharedService.emitChange(user);
     this.router.navigate(['session'],{state: {data: user}});
     this.dialogRef.close();
   }
