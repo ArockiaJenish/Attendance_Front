@@ -22,9 +22,9 @@ export class SessionComponent implements OnInit {
   session: boolean = false;
   constructor(private router: Router, private serv: StudentService, private dialog: MatDialog) {
     this.user = this.router.getCurrentNavigation()?.extras.state;
-    console.log('in session component');
+    // console.log('in session component');
     this.user = this.user.data;
-    console.log(this.user);
+    // console.log(this.user);
     if (this.user.loginTime !== null)
       this.checkinTime = this.user.loginTime;
     else
@@ -84,8 +84,6 @@ export class SessionComponent implements OnInit {
     this.check = false;
   }
 
-  //timeLeft: number = 60;
-  //running: boolean = false;
   interval!: any;
   checkDate!: any;
   startTimer() {
@@ -93,28 +91,25 @@ export class SessionComponent implements OnInit {
     this.interval = setInterval(() => {
 
       var difTime = this.makeDiffOfTime();
+      console.log(new Date().getMonth());
       this.checkinTime = addTimes(this.checkinTimeForCalculate, difTime);
 
     }, 1000)
   }
 
   makeDiffOfTime() {
-    // let totTime = this. this.checkinTime;
-    let date = new Date();
-    let tempLogin = this.checkDate.getFullYear() + '-' + this.format(this.checkDate.getMonth()) + '-' + this.format(this.checkDate.getDate()) + ' ' + this.format(this.checkDate.getHours()) + ':' + this.format(this.checkDate.getMinutes()) + ':' + this.format(this.checkDate.getSeconds());
-    let curTime = date.getFullYear() + '-' + this.format(date.getMonth()) + '-' + this.format(date.getDate()) + ' ' + this.format(date.getHours()) + ':' + this.format(date.getMinutes()) + ':' + this.format(date.getSeconds());
 
-    //let tempLogin = this.format(this.checkDate.getHours()) + ':' + this.format(this.checkDate.getMinutes()) + ':' + this.format(this.checkDate.getSeconds());
-    //let curTime = this.format(date.getHours()) + ':' + this.format(date.getMinutes()) + ':' + this.format(date.getSeconds());
-    let diff = new Date(curTime).getTime() - new Date(tempLogin).getTime();
-    //var diff = endDate.getTime() - startDate.getTime();
+    let tempLogin = new Date(this.checkDate.getFullYear(), this.checkDate.getMonth(), this.checkDate.getDate(), this.checkDate.getHours(), this.checkDate.getMinutes(), this.checkDate.getSeconds());
+  
+    let diff = new Date().getTime() - tempLogin.getTime();
+
     var days = Math.floor(diff / (60 * 60 * 24 * 1000));
     var hours = Math.floor(diff / (60 * 60 * 1000)) - (days * 24);
     var minutes = Math.floor(diff / (60 * 1000)) - ((days * 24 * 60) + (hours * 60));
     var seconds = Math.floor(diff / 1000) - ((days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60));
-    //console.log('day:' + days + ', hours: ' + hours + ', minutes: ' + minutes + ', seconds: ' + seconds);
+    
     var difTime = this.format(hours) + ":" + this.format(minutes) + ':' + this.format(seconds);
-    //this.checkinTime = difTime;
+    
     return difTime;
   }
 
@@ -159,18 +154,22 @@ function addTimes(totTime: any, curTime: any) {
 
   const z = (n: number) => (n < 10 ? '0' : '') + n;
 
-
+  //console.log(curTime, "curTime");
   const t = totTime.split(':');
   const t2 = curTime.split(':');
   let totTimeDate = new Date();
   totTimeDate.setHours(t[0]);
   totTimeDate.setMinutes(t[1]);
   totTimeDate.setSeconds(t[2]);
-  //console.log(totTimeDate);
+  //console.log(totTimeDate, 'totTimeDate');
   const totTimeMilSec = totTimeDate.getTime();//start time.......
   const curTimeMilSec = (t2[0] * 60 * 60 * 1000) + (t2[1] * 60 * 1000) + (t2[2] * 1000);//end time......
+  //console.log(totTimeMilSec, "totTimeMilSec");
+  //console.log(curTimeMilSec, "curTimeMilSec");
   const runTime = new Date(totTimeMilSec + curTimeMilSec);
+  //console.log(runTime, "runTime");
   let run = z(runTime.getHours()) + ':' + z(runTime.getMinutes()) + ':' + z(runTime.getSeconds());
+  //console.log(run, "run");
   return run;
 
 }

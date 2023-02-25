@@ -33,18 +33,19 @@ export class SignUpComponent implements OnInit {
     else
       this.matches = false;
 
-    if(this.signUpForm.valid && this.matches){
-      this.serv.registerStudent(this.signUpForm.value).subscribe((res: any) =>{
-        console.log("From response");
-        console.log(res)
-      }, (err: any) => {
-        console.log("From Error");
-        console.log(err);
-
-        this.response = err.error.text;
-        console.log(this.response);
-        if(err.status===200)
-          this.dialogRef.close();
+    if (this.signUpForm.valid && this.matches) {
+      this.serv.registerStudent(this.signUpForm.value).subscribe({
+        next: data => {
+          console.log("Response");
+          console.log(data);
+        },
+        error: err => {
+          console.log("from error");
+          console.log(err);
+          this.response = err.error.text;
+          if (this.response === "Registered Successfully")
+            setTimeout(() => this.dialogRef.close(), 2000);
+        }
       })
     }
   }

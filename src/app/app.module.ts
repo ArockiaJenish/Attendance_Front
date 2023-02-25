@@ -1,4 +1,4 @@
-import { InterceptorService } from './interceptor.service';
+
 import { RouterModule } from '@angular/router';
 
 import { NgModule } from '@angular/core';
@@ -58,7 +58,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner"
     SignInComponent
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    // {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
